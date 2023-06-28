@@ -35,9 +35,12 @@ export function useCustomFetch() {
     ): Promise<TData | null> =>
       wrappedRequest<TData>(async () => {
         const result = await fakeFetch<TData>(endpoint, params)
+        // console.log(result)
+        // const cacheKey = getCacheKey(endpoint, params)
+        // cache?.current.set(cacheKey, JSON.stringify(result))
         return result
       }),
-    [wrappedRequest]
+    [wrappedRequest, cache]
   )
 
   const clearCache = useCallback(() => {
