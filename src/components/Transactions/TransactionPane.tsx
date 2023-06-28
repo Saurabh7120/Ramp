@@ -6,6 +6,7 @@ export const TransactionPane: TransactionPaneComponent = ({
   transaction,
   loading,
   setTransactionApproval: consumerSetTransactionApproval,
+  newlyApproved,
 }) => {
   const [approved, setApproved] = useState(transaction.approved)
 
@@ -20,7 +21,7 @@ export const TransactionPane: TransactionPaneComponent = ({
       </div>
       <InputCheckbox
         id={transaction.id}
-        checked={approved}
+        checked={newlyApproved[transaction.id] !== undefined ? newlyApproved[transaction.id] : approved}
         disabled={loading}
         onChange={async (newValue) => {
           await consumerSetTransactionApproval({
